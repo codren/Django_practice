@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+{% if email %}
+{{ email }} 님 반갑습니다 !
+{% else %}
+Guest 님 반갑습니다 !
+{% endif %}
+{% endblock %}
