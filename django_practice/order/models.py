@@ -1,4 +1,5 @@
 from django.db import models
+
 class Order(models.Model):
     user = models.ForeignKey('user.User', verbose_name='사용자', on_delete=models.CASCADE)
     product = models.ForeignKey('product.Product', verbose_name='상품명', on_delete=models.CASCADE)
