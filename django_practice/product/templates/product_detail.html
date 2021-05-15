@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block content %}
+<div class="row mt-5">
+  <div class="col-12">
+    <div class="card text-white" style="width: 100%;">
+      <div class="card-body">
+        <h5 class="card-title">{{ product.name }}</h5>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <form method="POST" action="/order/create/">   
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form-group text-white">
+                  {% ifnotequal field.name 'product' %}
+                  <label class="" for="{{ field.id_for_label}}">{{ field.label}}</label>
+                  {% endifnotequal%}
+                  <input type="{{ field.field.widget.input_type}}" class="form-control" id="{{ field.id_for_label}}" 
+                  placeholder="{{ field.label}}" name="{{field.name}}"
+                  value="{% ifequal field.name 'product' %}{{product.id}}{% endifequal %}">  
+                </div>
+                {% if field.errors %}
+                <span style="color:red">{{field.errors}}</span>
+                {% endif %}
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">주문하기</button>
+          </form>
+        </li>
+        <li class="list-group-item text-white">가격: {{ product.price|intcomma }} 원</li>
+        <li class="list-group-item text-white">등록날짜: {{ product.register_date|date:'Y-m-d H:i' }}</li>
+        <li class="list-group-item text-white">재고: {{ product.stock|intcomma }} 개</li>
+        <li class="list-group-item text-white">{{ product.description|safe}}</li> 
+      </ul>
+    </div>
+  </div>
+  <a  href="/product" style="text-decoration: none; margin: 20px 0px 0px 10px;">목록보기</a>
+  {% endblock %}
