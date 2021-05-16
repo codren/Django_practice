@@ -6,6 +6,28 @@ from user.decorators import admin_required
 from order.forms import RegisterForm as OrderForm
 from .models import Product
 from .forms import RegisterForm
+from rest_framework import generics     
+from rest_framework import mixins
+from product.serializers import ProductSerializer
+class ProductListAPI(generics.GenericAPIView, mixins.ListModelMixin):
+    serializer_class = ProductSerializer    
+
+    def get_queryset(self):
+        return Product.objects.all().order_by('id')
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)  
+    
+
+class ProductDetailAPI(generics.GenericAPIView, mixins.RetrieveModelMixin): 
+    serializer_class = ProductSerializer
+  
+    def get_queryset(self):
+        return Product.objects.all().order_by('id')     
+
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)  
+    
 class ProductList(ListView):
     model = Product
     template_name = 'product.html'
