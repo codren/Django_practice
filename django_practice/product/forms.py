@@ -15,15 +15,6 @@ class RegisterForm(forms.Form):
         description = cleaned_data.get('description')
         stock = cleaned_data.get('stock')
 
-        if name and price and description and stock:
-            product = Product(
-                name=name,
-                price=price,
-                description=description,
-                stock=stock,
-            )
-            product.save()
-
         if not name:
            self.add_error('name', '상품명을 입력해주세요.')
         if not price:

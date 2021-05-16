@@ -12,7 +12,6 @@ class RegisterForm(forms.Form):
 
     def clean(self):
         cleaned_data = super().clean()
-        email = cleaned_data.get('email')
         password = cleaned_data.get('password')
         re_password = cleaned_data.get('re_password')
 
@@ -20,13 +19,6 @@ class RegisterForm(forms.Form):
             if password != re_password:
                 self.add_error('password', '비밀번호가 서로 다릅니다.')
                 self.add_error('re_password', '비밀번호가 서로 다릅니다.')
-            else:
-                fcuser = User(
-                    email=email,
-                    password=make_password(password),
-                )
-                fcuser.save()
-
 
 class LoginForm(forms.Form):
     email = forms.EmailField(error_messages={'required': '이메일을 입력해주세요.'},
@@ -47,8 +39,6 @@ class LoginForm(forms.Form):
                 return
 
             if not check_password(password, user.password):
-                self.add_error('password', '비밀번호가 틀렸습니다.')    
-            else:       
-                self.email = email       
+                self.add_error('password', '비밀번호가 틀렸습니다.')         
                 
                                  
