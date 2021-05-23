@@ -22,6 +22,7 @@ from order.views import OrderCreate, OrderList
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('baton/', include('baton.urls')), 
     path('', index),
     path('register/', RegisterView.as_view()),
     path('login/', LoginView.as_view()),

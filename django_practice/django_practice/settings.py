@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'baton',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,10 +41,21 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'rest_framework',
-    'user',
-    'product',
-    'order',
+    'user.apps.UserConfig',
+    'product.apps.ProductConfig',
+    'order.apps.OrderConfig',
+    'baton.autodiscover'    
 ]
+
+BATON = {
+    'SITE_HEADER': 'SITE_HEADER',
+    'SITE_TITLE': 'SITE_TITLE',
+    'INDEX_TITLE': 'INDEX_TITLE',
+    'SUPPORT_HREF': 'https://velog.io/@codren',
+    'COPYRIGHT': 'copyright © 2021 Codren',
+    'POWERED_BY': '<a href="https://velog.io/@codren">Codren</a>',
+    'MENU_TITLE': 'MENU_TITLE',
+}
 
 
 MIDDLEWARE = [
