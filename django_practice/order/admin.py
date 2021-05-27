@@ -81,6 +81,7 @@ class OrderAdmin(admin.ModelAdmin):
                             action_flag = CHANGE,
                             change_message = '주문 환불')
                     qs.update(status='환불') 
+
         return super().changelist_view(request, extra_context)
 
 
@@ -99,8 +100,7 @@ class OrderAdmin(admin.ModelAdmin):
     def get_urls(self):
         urls = super().get_urls()
         date_urls = [
-            path('date_view/', self.date_view), 
-        ]
+            path('date_view/', self.date_view), ]
         return date_urls + urls
 
 
@@ -112,8 +112,7 @@ class OrderAdmin(admin.ModelAdmin):
         context = dict(
             self.admin_site.each_context(request),  
             week_data = week_data,
-            data = data,
-        )
+            data = data,)
         return TemplateResponse(request, 'admin/order_date_view.html', context)
 
 admin.site.register(Order, OrderAdmin)

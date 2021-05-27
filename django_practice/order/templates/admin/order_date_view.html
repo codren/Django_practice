@@ -1,7 +1,5 @@
 {% extends 'admin/base_site.html' %}
-{% load i18n admin_urls static admin_modify admin_list %}
-
-
+{% load i18n admin_urls static admin_modify %}
 
 {% block breadcrumbs %}
 <div class="breadcrumbs">
@@ -17,19 +15,13 @@
     <table class="table mb-5">
         <thead>
             <tr>
-                <th>사용자</th>
-                <th>상품</th>
-                <th>상태</th>
-                <th>일시</th>
+                <th>사용자</th><th>상품</th><th>상태</th><th>일시</th>
             </tr>
         </thead>
         <tbody>
             {% for d in week_data %}
             <tr>
-                <td>{{ d.user }}</td>
-                <td>{{ d.product }}</td>
-                <td>{{ d.status }}</td>
-                <td>{{ d.register_date}}</td>
+                <td>{{ d.user }}</td><td>{{ d.product }}</td><td>{{ d.status }}</td><td>{{ d.register_date}}</td>
             </tr>
             {% endfor %}
         </tbody>
@@ -38,24 +30,17 @@
     <table class="table">
         <thead>
             <tr>
-                <th>사용자</th>
-                <th>상품</th>
-                <th>상태</th>
-                <th>일시</th>
+                <th>사용자</th><th>상품</th><th>상태</th><th>일시</th>
             </tr>
         </thead>
         <tbody>
             {% for d in data %}
             <tr>
-                <td>{{ d.user }}</td>
-                <td>{{ d.product }}</td>
-                <td>{{ d.status }}</td>
-                <td>{{ d.register_date}}</td>
+                <td>{{ d.user }}</td><td>{{ d.product }}</td><td>{{ d.status }}</td><td>{{ d.register_date}}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
     <a class="btn btn-primary mt-4" href="/admin/order/order">돌아가기</a>
 </div>
-
 {% endblock %}

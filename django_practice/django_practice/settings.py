@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'baton.autodiscover'    
 ]
 
+
 BATON = {
     'SITE_HEADER': 'SITE_HEADER',
     'SITE_TITLE': 'SITE_TITLE',
@@ -55,6 +56,38 @@ BATON = {
     'COPYRIGHT': 'copyright © 2021 Codren',
     'POWERED_BY': '<a href="https://velog.io/@codren">Codren</a>',
     'MENU_TITLE': 'MENU_TITLE',
+    'MENU': (
+        { 'type': 'title', 'label': 'main', 'apps': ('user', 'order', 'product') },       
+        {
+            'type': 'app',
+            'name': 'user',
+            'label': '사용자',
+            'icon': 'fa fa-lock',
+            'models': (
+                {
+                    'name': 'user',
+                    'label': '사용자'
+                },
+            )
+        },
+        { 'type': 'free', 'label': '주문', 'children': [
+            { 'type': 'model', 'label': '주문', 'name': 'order', 'app': 'order'}, 
+            { 'type': 'free', 'label': '최근 주문', 'url': '/admin/order/order/date_view/',
+            're': '^/admin/order/order/date_view/(\d*)?'}, 
+        ] },
+        {
+            'type': 'app',
+            'name': 'product',
+            'label': '상품',
+            'models': (
+                {
+                    'name': 'product',
+                    'label': '상품'
+                },
+            )
+        },
+        { 'type': 'free', 'label': '매뉴얼', 'url': '/admin/manual/'},  
+    )
 }
 
 
@@ -73,7 +106,9 @@ ROOT_URLCONF = 'django_practice.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR,'templates')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
